@@ -1,0 +1,12 @@
+<h1>Hello! Sign in below:</h1>
+
+<div class="user-widget">
+	<% if current_user %>
+		Welcome <strong><%= current_user.name %></strong>!
+		<%= image_tag(current_user.normalimage) %>
+		<%= link_to "Sign Out", signout_path, id: "sign_out" %>
+	<% else %>
+		<%= link_to "Sign in with Github", "/auth/github", id: "sign_in" %>
+	<% end %>
+
+</div>

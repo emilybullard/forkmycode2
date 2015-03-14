@@ -1,4 +1,23 @@
 Rails.application.routes.draw do
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
+  
+  root to: "home#index"
+
+  match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
+
+  match 'auth/failure', to: redirect('/'), via: [:get, :post]
+
+  match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
+
+  get 'home/index'
+
+  get 'sessions/create'
+
+  get 'sessions/destroy'
+  
+  resources :users
+
   resources :photos
 
   resources :messages
